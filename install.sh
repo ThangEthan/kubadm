@@ -1,6 +1,6 @@
 #!/bin/bash
-sudo apt-get update
 echo "Installing docker"
+sudo apt-get update
 sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
@@ -14,9 +14,9 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-sudo echo "{
+echo "{
   \"exec-opts\": [\"native.cgroupdriver=systemd\"]
-}" > /etc/docker/daemon.json
+}" | sudo tee -a /etc/docker/daemon.json
 sudo systemctl restart docker
 
 echo "Installing kubeadm kubelet kubectl"
