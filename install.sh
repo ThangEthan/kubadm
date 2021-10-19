@@ -14,9 +14,11 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-echo "{
+
+echo "{                                                                                      
   \"exec-opts\": [\"native.cgroupdriver=systemd\"]
-}" | sudo tee -a /etc/docker/daemon.json
+}" | sudo tee /etc/docker/daemon.json
+
 sudo systemctl restart docker
 
 echo "Installing kubeadm kubelet kubectl"
